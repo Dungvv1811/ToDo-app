@@ -11,51 +11,67 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    private $user;
-    public function __construct(User $user)
+//    private $user;
+//    public function __construct(User $user)
+//        {
+//            $this->user = $user;
+//        }
+
+//    public function postRegister(Request $request)
+//   {
+//
+////       $rules = [
+////           'name' => 'unique:users|required',
+////           'email'    => 'unique:users|required',
+////           'password' => 'required',
+////       ];
+////       $input     = $request->only('name', 'email','password');
+////       $validator = Validator::make($input, $rules);
+////
+////       if ($validator->fails()) {
+////
+//////           return redirect()->route('register');
+////           return response()->json(['success' => false, 'error' => $validator->messages()]);
+////       }
+////       $name = $request->name;
+////       $email    = $request->email;
+////       $password = $request->password;
+////       $user     = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
+//
+//
+//       return redirect()->route('login');
+//   }
+//
+//   public function register()
+//   {
+//
+//       return view('auth/register');
+//   }
+
+
+
+
+
+
+        public function create()
         {
-            $this->user = $user;
+            return view('register.create');
         }
 
-    public function postRegister(Request $request)
-   {
+        public function store()
+        {
+            $this->validate(request(),[
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required|confirmed'
+            ]);
 
-//       $rules = [
-//           'name' => 'unique:users|required',
-//           'email'    => 'unique:users|required',
-//           'password' => 'required',
-//       ];
-//       $input     = $request->only('name', 'email','password');
-//       $validator = Validator::make($input, $rules);
-//
-//       if ($validator->fails()) {
-//
-////           return redirect()->route('register');
-//           return response()->json(['success' => false, 'error' => $validator->messages()]);
-//       }
-//       $name = $request->name;
-//       $email    = $request->email;
-//       $password = $request->password;
-//       $user     = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
+            $user = User::create(request(['name', 'email', 'password']));
 
+            auth()->login($user);
+            return redirect()->to('/welcome');
 
-
-
-
-       $user = $this->user->create([
-          'name' => $request->name,
-          'email' => $request->email,
-          'password' => Hash::make($request->password)
-       ]);
-
-       return redirect()->route('login');
-   }
-
-   public function register()
-   {
-
-       return view('auth/register');
-   }
+        }
 
 
 

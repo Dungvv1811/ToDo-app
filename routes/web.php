@@ -37,8 +37,10 @@ Route::get('/', function () {
 //    'uses' => 'LoginController@login'
 //]);
 
-Route::get('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/postRegister', [RegisterController::class,'postRegister']);
+//Route::get('/register', [RegisterController::class, 'register'])->name('register');
+//Route::post('/postRegister', [RegisterController::class,'postRegister']);
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/postRegister', [RegisterController::class,'store']);
 Route::get('/login', [LoginController::class, 'login', 'login'])->name('login');
 
 

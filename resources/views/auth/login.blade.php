@@ -35,10 +35,10 @@
         }
 
         .card{
-            height: 370px;
+            height: 470px;
             margin-top: auto;
             margin-bottom: auto;
-            width: 400px;
+            width: 600px;
             background-color: rgba(0,0,0,0.5) !important;
         }
 
@@ -114,11 +114,6 @@
         <div class="card">
             <div class="card-header">
                 <h3>Sign In</h3>
-                <div class="d-flex justify-content-end social_icon">
-                    <span><i class="fab fa-facebook-square"></i></span>
-                    <span><i class="fab fa-google-plus-square"></i></span>
-                    <span><i class="fab fa-twitter-square"></i></span>
-                </div>
             </div>
             <div class="card-body">
                 <form action="login" method="post">
